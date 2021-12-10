@@ -20,6 +20,15 @@ Item::~Item() {
   delete name;
 }
 
+// Return pointer to name of item
+char* Item::getName() {
+  return name;
+}
+
+// Set name
+void Item::setName(char* newName) {
+  name = newName;
+}
 
 // Print name of item
 void Item::printName() {

@@ -15,7 +15,7 @@ Room::Room() {
   description[0] = '\0';
   presentItems = new vector <Item*>;
   neighbors = new map <char*, Room*>;
-  locked = new bool false;
+  locked = false;
 }
 
 // When constructing rooms, provide room name
@@ -25,7 +25,7 @@ Room::Room(char* newName, char* newDesc) {
   description = newDesc;
   presentItems = new vector <Item*>;
   neighbors = new map <char*, Room*>;
-  locked = new bool false;
+  locked = false;
 }
 
 // Delete attributes and items in room
@@ -55,37 +55,40 @@ void Room::printPaths() {
 
 // Adds given item to the room's presentItems
 void Room::addItem(Item* newItem) {
-  presentItems->emplace_back(*newItem);
+  presentItems->emplace_back(newItem);
 }
 
 // Prints names of all items in room
 void Room::printItems() {
   cout << "There are the following items here:" << endl;
   for (auto it = presentItems->begin(); it != presentItems->end(); it++) {
-    cout << presentItems->name << endl;
+    cout << (*it)->getName() << endl;
   }
 }
 
 
 // Deletes given item and removes it from presentItems
-void Room::rmItem(Item* oldItem) {
+Item* Room::rmItem(char* oldName) {
   for (auto it = presentItems->begin(); it != presentItems->end(); it++) {
-    if (*oldItem == *it) {
-      delete *it;
-      erase it;
-      return;
+    if (strcmp(oldName, (*it)->getName())) {
+      Item* oldItem = *it;
+      presentItems->erase(it);
+      return oldItem;
     }
   }
-  cout << "Deletion error - item not found." << endl;
+  cout << "There's no item with that name!" << endl;
+  Item* placeholder;
+  return placeholder;
 }
 
 // Return true if the given item is in the room; return false otherwise.
 bool Room::containsItem(Item* searchItem) {
   for (auto it = presentItems->begin(); it != presentItems->end(); it++) {
-    if (*searchItem == *it) {
+    if (*(*it) == *searchItem) {
       return true;
     }
   }
+  return false;
 }
 
 // Adds neighboring room to neighbors map

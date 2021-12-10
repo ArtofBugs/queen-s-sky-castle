@@ -12,6 +12,9 @@ class Item {
   public:
     Item();
     Item(char*);
+    ~Item();
+    char* getName();
+    void setName(char*);
     void printName();
   protected:
     char* name;

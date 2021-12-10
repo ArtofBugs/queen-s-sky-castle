@@ -19,7 +19,7 @@ class Room {
     void printPaths();
     void addItem(Item*);
     void printItems();
-    void rmItem(Item*);
+    Item* rmItem(char*);
     bool containsItem(Item*);
     void addNeighbor(char*, Room*);
 
@@ -28,7 +28,7 @@ class Room {
     char* name;
     map <char*, Room*> * neighbors;
     char* description;
-    bool* locked;
+    bool locked;
 };
 
 #endif
