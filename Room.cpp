@@ -7,6 +7,17 @@
 
 using namespace std;
 
+// Default constructor
+Room::Room() {
+  name = new char[1];
+  name[0] = '\0';
+  description = new char[1];
+  description[0] = '\0';
+  presentItems = new vector <Item*>;
+  neighbors = new map <char*, Room*>;
+  locked = new bool false;
+}
+
 // When constructing rooms, provide room name
 // Add items to room after construction.
 Room::Room(char* newName, char* newDesc) {
@@ -21,8 +32,7 @@ Room::Room(char* newName, char* newDesc) {
 Room::~Room() {
   delete[] name;
   delete[] description;
-  for (auto it = presentItems.begin(); it != presentItems.end(); it++) {
-    delete (*(*it)).name;
+  for (auto it = presentItems->begin(); it != presentItems->end(); it++) {
     delete *it;
   }
   delete presentItems;
@@ -45,21 +55,21 @@ void Room::printPaths() {
 
 // Adds given item to the room's presentItems
 void Room::addItem(Item* newItem) {
-  presentItems.emplace_back(*newItem);
+  presentItems->emplace_back(*newItem);
 }
 
 // Prints names of all items in room
 void Room::printItems() {
   cout << "There are the following items here:" << endl;
-  for (auto it = presentItems.begin(); it != presentItems.end(); it++) {
-    cout << presentItems.name << endl;
+  for (auto it = presentItems->begin(); it != presentItems->end(); it++) {
+    cout << presentItems->name << endl;
   }
 }
 
 
 // Deletes given item and removes it from presentItems
 void Room::rmItem(Item* oldItem) {
-  for (auto it = presentItems.begin(); it != presentItems.end(); it++) {
+  for (auto it = presentItems->begin(); it != presentItems->end(); it++) {
     if (*oldItem == *it) {
       delete *it;
       erase it;
@@ -71,8 +81,8 @@ void Room::rmItem(Item* oldItem) {
 
 // Return true if the given item is in the room; return false otherwise.
 bool Room::containsItem(Item* searchItem) {
-  for (auto it = presentItems.begin(); it != presentItems.end(); it++) {
-    if (*oldItem == *it) {
+  for (auto it = presentItems->begin(); it != presentItems->end(); it++) {
+    if (*searchItem == *it) {
       return true;
     }
   }

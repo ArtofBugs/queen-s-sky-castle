@@ -6,7 +6,7 @@ For a map of the castle, visit this link:
                        ENTRANCE
 */
 
-using namespace std
+using namespace std;
 
 #include <iostream>
 #include <cstring>
@@ -24,7 +24,7 @@ Struct Item {
 */
 
 void initializeRooms(Room* currRoom);
-void printHelp(Room* currRoom);
+void printHelp();
 void printCurrPlace(Room* currRoom);
 void printInventory(Room* inventory);
 void takeItem(Room* inventory, Room* currRoom);
@@ -36,6 +36,7 @@ const int maxDescLength = 1000; // Maximum character length of room descriptions
 int main() {
 
   Room* currRoom;
+  vector <Room*> * castle = new vector <Room*>;
 
   cout << "Welcome to the Queen's Sky Castle - Zuul!" << endl;
   printHelp();
@@ -48,7 +49,7 @@ int main() {
 }
 
 // Set up rooms, names, descriptions, items, and locations
-void initializeRooms(Room* currRoom) {
+void initializeRooms(vector <Room*> * castle, Room* currRoom) {
   char* newName = new char[maxNameLength];
   char* newDesc = new char[maxDescLength];
   newName[0] = '\0';
@@ -77,7 +78,7 @@ void initializeRooms(Room* currRoom) {
 
 // When the player has used the HELP command - print help information on how to
 // play the game
-void printHelp(Room* currRoom) {
+void printHelp() {
   cout << "Welcome to the queen's sky castle. Explore the castle and move objects to try to win the grand prize!" << endl;
   cout << "Your command words are:" << endl;
   cout << "GO {direction}    INVENTORY    TAKE {object in inventory}    DROP {object in room}    HELP    QUIT" << endl;
@@ -106,7 +107,7 @@ void printInventory(Room* inventory, Room* currRoom) {
 // When the player has used the DROP command - search for the given item in
 // inventory; drop the item in the current room if it exists.
 void dropItem() {
-
+  
 }
 
 // When the player has used the DROP command - search for the given item in

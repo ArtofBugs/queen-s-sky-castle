@@ -5,12 +5,15 @@
 #include <cstring>
 #include <vector>
 #include <map>
+#include "Item.h"
 
 using namespace std;
 
 class Room {
   public:
+    Room();
     Room(char* name, char* description);
+    ~Room();
     void printName();
     void printDescription();
     void printPaths();
@@ -23,7 +26,7 @@ class Room {
   protected:
     vector <Item*> * presentItems;
     char* name;
-    map* neighbors;
+    map <char*, Room*> * neighbors;
     char* description;
     bool* locked;
 };
