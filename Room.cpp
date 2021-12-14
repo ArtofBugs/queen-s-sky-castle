@@ -69,14 +69,14 @@ void Room::printItems() {
 // Deletes given item and removes it from presentItems
 Item* Room::rmItem(char* oldName) {
   for (auto it = presentItems->begin(); it != presentItems->end(); it++) {
-    if (strcmp(oldName, (*it)->getName())) {
+    if (strcmp(oldName, (*it)->getName()) == 0) {
       Item* oldItem = *it;
       presentItems->erase(it);
       return oldItem;
     }
   }
   cout << "There's no item with that name!" << endl;
-  Item* placeholder;
+  Item* placeholder = NULL;
   return placeholder;
 }
 

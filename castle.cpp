@@ -19,8 +19,8 @@ void initializeRooms(Room* currRoom);
 void printHelp();
 void printCurrPlace(Room* currRoom);
 void printInventory(Room* inventory);
-void takeItem(Room* inventory, Room* currRoom);
-void dropItem(Room* inventory, Room* currRoom);
+void takeItem(char* itemName, Room* inventory, Room* currRoom);
+void dropItem(char* itemName, Room* inventory, Room* currRoom);
 char* promptText();
 
 // const int maxNameLength = 100; // Maximum character length of room names
@@ -86,31 +86,43 @@ int main() {
     // Given an integer n, strncmp() compares two cstrings to see if the first n
     // characters match; if they do, it returns 0.
     else if (strncmp(command, "GO ", 3) == 0) {
-      
+      char* direction = &(command[3]);
+      cout << "Direction found: " << direction << endl;
       cout << "GOING..." << endl;
-      // set currRoom to corresponding listing in map
+      // TODO: set currRoom to corresponding listing in map
+      delete command;
+      printCurrPlace(currRoom);
     }
     else if (strcmp(command, "INVENTORY") == 0) {
       printInventory(inventory);
+      delete command;
     }
     else if (strncmp(command, "TAKE ", 5) == 0) {
+      char* itemName = &(command[5]);
+      cout << "Object found: " << itemName << endl;
       cout << "TAKING..." << endl;
-      // TODO: make another cstring made up of the characters after "TAKE " in command
-      // currRoom->takeItem();
+      takeItem(itemName, inventory, currRoom);
+      delete command;
+      printCurrPlace(currRoom);
     }
     else if (strncmp(command, "DROP ", 5) == 0) {
-
+      char* itemName = &(command[5]);
+      cout << "Object found: " << itemName << endl;
+      cout << "DROPPING..." << endl;
+      dropItem(itemName, inventory, currRoom);
+      delete command;
+      printCurrPlace(currRoom);
     }
     else if (strcmp(command, "QUIT") == 0) {
       cout << "Thank you for playing!" << endl;
+      delete command;
       return 0;
     }
     else {
       cout << "Command not recognized. Type HELP for a list of command words." << endl;
+      delete command;
       continue;
     }
-
-    printCurrPlace(currRoom);
 
   }
   cout << "You won! Thank you for playing!" << endl;
@@ -154,21 +166,21 @@ void printInventory(Room* inventory) {
 // inventory; drop the item in the current room if it exists.
 // I got the idea for the NULL pointer from looking up strstr() for my media
 // database project.
-void dropItem(Room* inventory, Room* currRoom) {
-  // Item* move = currRoom->rmItem(specified);
-  // if (move != NULL) {
-    // currRoom->addItem(move);
-  // }
+void dropItem(char* itemName, Room* inventory, Room* currRoom) {
+  Item* move = inventory->rmItem(itemName);
+  if (move != NULL) {
+    currRoom->addItem(move);
+  }
   cout << endl;
 }
 
 // When the player has used the DROP command - search for the given item in
 // inventory; drop the item in the current room if it exists.
-void takeItem(Room* inventory, Room* currRoom) {
-  // Item* move = currRoom->rmItem(specified);
-  // if (move != NULL) {
-    // inventory->addItem(move);
-  // }
+void takeItem(char* itemName, Room* inventory, Room* currRoom) {
+  Item* move = currRoom->rmItem(itemName);
+  if (move != NULL) {
+    inventory->addItem(move);
+  }
   cout << endl;
 }
 
