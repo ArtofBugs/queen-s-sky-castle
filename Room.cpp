@@ -40,7 +40,7 @@ Room::~Room() {
 
 // Prints name of room
 void Room::printName() {
-  cout << name << endl;
+  cout << name;
 }
 
 // Prints description of room
@@ -60,7 +60,6 @@ void Room::addItem(Item* newItem) {
 
 // Prints names of all items in room
 void Room::printItems() {
-  cout << "There are the following items here:" << endl;
   for (auto it = presentItems->begin(); it != presentItems->end(); it++) {
     cout << (*it)->getName() << endl;
   }
@@ -84,7 +83,7 @@ Item* Room::rmItem(char* oldName) {
 // Return true if the given item is in the room; return false otherwise.
 bool Room::containsItem(Item* searchItem) {
   for (auto it = presentItems->begin(); it != presentItems->end(); it++) {
-    if (*(*it) == *searchItem) {
+    if (strcmp((*it)->getName(), searchItem->getName()) == 0) {
       return true;
     }
   }
