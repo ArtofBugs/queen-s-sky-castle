@@ -1,9 +1,6 @@
 /*
 For a map of the castle, visit this link:
-
-
-
-                       ENTRANCE
+https://drive.google.com/file/d/1uFgxeS7I4TR3Gba0C-XyWu_gwyGmyH88/view?usp=sharing
 */
 
 using namespace std;
@@ -23,9 +20,6 @@ void takeItem(char* itemName, Room* inventory, Room* currRoom);
 void dropItem(char* itemName, Room* inventory, Room* currRoom);
 char* promptText();
 
-// const int maxNameLength = 100; // Maximum character length of room names
-// const int maxDescLength = 1000; // Maximum character length of room descriptions
-
 int main() {
 
   Room* currRoom;
@@ -41,27 +35,95 @@ int main() {
   // room
 
   newName = new char[6];
-  strcpy(newName, "foyer"); // do I need \0 at the end? TODO
-  newDesc = new char[90];
-  strcpy(newDesc, "Yes, both the chandeliers and floors are made of ice crystals - I mean, these ARE clouds."); // do I need \0 at the end? TODO
+  strcpy(newName, "FOYER");
+  newDesc = new char[100];
+  strcpy(newDesc, "Yes, both the chandeliers and floors are made of ice crystals - I mean, this IS the cloud queendom.");
   Room* foyer = new Room(newName, newDesc);
   castle->emplace_back(foyer);
 
   currRoom = foyer;
 
+  newName = new char[13];
+  strcpy(newName, "FRONT GARDEN");
+  newDesc = new char[85];
+  strcpy(newDesc, "There are a lot of flowers and not a lot of people, just the way the queen likes it.");
+  Room* frontGarden = new Room(newName, newDesc);
+  castle->emplace_back(frontGarden);
+
   newName = new char[10];
-  strcpy(newName, "jade card"); // do I need \0 at the end? TODO
+  strcpy(newName, "MAIN HALL");
+  newDesc = new char[153];
+  strcpy(newDesc, "Other than having twenty chandeliers, this room isn't very interesting. On the other hand, there are delicious smells coming through one of the doors...");
+  Room* mainHall = new Room(newName, newDesc);
+  castle->emplace_back(mainHall);
+
+  newName = new char[9];
+  strcpy(newName, "BALLROOM");
+  newDesc = new char[124];
+  strcpy(newDesc, "There are plenty of tables covered in gold cloth, but the food's not on them yet. There is definitely food nearby though...");
+  Room* ballroom = new Room(newName, newDesc);
+  castle->emplace_back(ballroom);
+
+  newName = new char[12];
+  strcpy(newName, "DINING HALL");
+  newDesc = new char[124];
+  strcpy(newDesc, "Chandeliers, tables, and... only leftovers. There's no time to eat now, anyway. Maybe you'll catch another feast next time.");
+  Room* diningHall = new Room(newName, newDesc);
+  castle->emplace_back(diningHall);
+
+  newName = new char[8];
+  strcpy(newName, "GALLERY");
+  newDesc = new char[107];
+  strcpy(newDesc, "Art gallery? Photo gallery? Theater gallery? The queen's got everything here... except for the spectators.");
+  Room* gallery = new Room(newName, newDesc);
+  castle->emplace_back(gallery);
+
+  newName = new char[13];
+  strcpy(newName, "COAT CHAMBER");
+  newDesc = new char[120];
+  strcpy(newDesc, "The queen doesn't keep her coats here - only the guests do. From the looks of it, she's pretty selective in her guests.");
+  Room* coatChamber = new Room(newName, newDesc);
+  castle->emplace_back(coatChamber);
+
+  newName = new char[12];
+  strcpy(newName, "BACK GARDEN");
+  newDesc = new char[63];
+  strcpy(newDesc, "Wait, there are ice sculptures here? (And flowers, of course.)");
+  Room* backGarden = new Room(newName, newDesc);
+  castle->emplace_back(backGarden);
+
+  newName = new char[8];
+  strcpy(newName, "KITCHEN");
+  newDesc = new char[99];
+  strcpy(newDesc, "A walk-in refrigerator, a walk-in freezer, and... a walk-in oven? Fortunately, they're all locked.");
+  Room* kitchen = new Room(newName, newDesc);
+  castle->emplace_back(kitchen);
+
+  newName = new char[12];
+  strcpy(newName, "WEST STAIRS");
+  newDesc = new char[99];
+  strcpy(newDesc, "TODO");
+  Room* westStairs = new Room(newName, newDesc);
+  castle->emplace_back(westStairs);
+
+
+
+
+
+
+  newName = new char[10];
+  strcpy(newName, "JADE CARD");
   Item* jadeCard = new Item(newName);
   foyer->addItem(jadeCard);
 
   newName = new char[16];
-  strcpy(newName, "queen's bedroom"); // do I need \0 at the end? TODO
+  strcpy(newName, "QUEEN'S BEDROOM");
   newDesc = new char[5];
-  strcpy(newDesc, "TODO"); // do I need \0 at the end? TODO
+  strcpy(newDesc, "TODO");
   Room* bedroom = new Room(newName, newDesc);
 
   newName = new char[6];
-  strcpy(newName, "crown"); // do I need \0 at the end? TODO
+  strcpy(newName, "CROWN");
   Item* crown = new Item(newName);
   bedroom->addItem(crown);
 
@@ -74,7 +136,8 @@ int main() {
   strcpy(newDirection, "NORTH");
   bedroom->addNeighbor(newDirection, balcony);
 
-  cout << "Welcome to the Queen's Sky Castle - Zuul!" << endl;
+  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
   printHelp();
   printCurrPlace(currRoom);
 
@@ -88,9 +151,15 @@ int main() {
     else if (strncmp(command, "GO ", 3) == 0) {
       char* direction = &(command[3]);
       cout << "Direction found: " << direction << endl;
-      cout << "GOING..." << endl;
+      cout << "Going..." << endl;
       // TODO: set currRoom to corresponding listing in map
       delete command;
+
+      // game twists
+      // if (strcmp(currRoom->getName(), "COAT CHAMBER") && strcmp(direction, "NORTH") == 0
+        // && !coatChamber->containsItem("JADE CARD")) {
+
+      // }
       printCurrPlace(currRoom);
     }
     else if (strcmp(command, "INVENTORY") == 0) {
@@ -103,7 +172,6 @@ int main() {
       cout << "TAKING..." << endl;
       takeItem(itemName, inventory, currRoom);
       delete command;
-      printCurrPlace(currRoom);
     }
     else if (strncmp(command, "DROP ", 5) == 0) {
       char* itemName = &(command[5]);
@@ -111,6 +179,13 @@ int main() {
       cout << "DROPPING..." << endl;
       dropItem(itemName, inventory, currRoom);
       delete command;
+
+      // game twists
+      if (strcmp(itemName, "sun berries") == 0) {
+        // diningHall.addItem(soup);
+        // diningHall.addItem(spoon);
+      }
+
       printCurrPlace(currRoom);
     }
     else if (strcmp(command, "QUIT") == 0) {
@@ -133,9 +208,10 @@ int main() {
 // When the player has used the HELP command - print help information on how to
 // play the game
 void printHelp() {
-  cout << "Welcome to the queen's sky castle. Explore the castle and move objects to try to win the grand prize!" << endl;
+  cout << "Welcome to the Queen's Sky Castle - Zuul! Explore the castle and move objects to try to win the grand prize!" << endl;
   cout << "Your command words are:" << endl;
-  cout << "GO {direction}    INVENTORY    TAKE {object in inventory}    DROP {object in room}    HELP    QUIT" << endl;
+  cout << "GO {DIRECTION}    INVENTORY    TAKE {OBJECT IN INVENTORY}    DROP {OBJECT IN ROOM}    HELP    QUIT" << endl;
+  cout << "Commands should be written in all caps!" << endl;
   cout << endl;
 }
 
@@ -146,8 +222,10 @@ void printCurrPlace(Room* currRoom) {
   currRoom->printName();
   cout << "." << endl;
   currRoom->printDescription();
+  cout << endl;
   cout << "The following items are here:" << endl;
   currRoom->printItems();
+  cout << endl;
   cout << "Paths:" << endl;
   currRoom->printPaths();
   cout << endl;

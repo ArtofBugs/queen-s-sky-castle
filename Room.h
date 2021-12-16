@@ -22,6 +22,7 @@ class Room {
     Item* rmItem(char*);
     bool containsItem(Item*);
     void addNeighbor(char*, Room*);
+    Room* findNeighbor(char*);
 
   protected:
     vector <Item*> * presentItems;

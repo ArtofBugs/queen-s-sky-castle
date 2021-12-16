@@ -92,5 +92,17 @@ bool Room::containsItem(Item* searchItem) {
 
 // Adds neighboring room to neighbors map
 void Room::addNeighbor(char* direction, Room* newRoom) {
-  // TODO
+  neighbors->insert(direction, newRoom);
+}
+
+Room* Room::findNeighbor(char* direction) {
+  /*
+  for (auto it = neighbors->begin(); it != neighbors->end(); it++) {
+      if ((*it)->
+      }
+  }
+  */
+  return neighbors->at(direction);
+  // at() returns the location of the value that corresponds to the given key
+
 }
