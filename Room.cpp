@@ -96,6 +96,24 @@ void Room::addNeighbor(char* direction, Room* newRoom) {
 }
 
 Room* Room::findNeighbor(char* direction) {
+
+  for (auto it = neighbors->begin(); it != neighbors->end(); it++) {
+    // if (key_comp(*(*it), *direction) == true) { // key_comp returns true if the two
+      // arguments are not in different places in memory
+
+    if (strcmp(direction, it->first) == 0) {
+      cout << "Found element at " << direction << endl;
+      cout << "It is ";
+      it->second->printName();
+      cout << endl;
+      return it->second;
+    }
+  }
+  return NULL;
+  /*
+  I'm guessing this part does not work because the key is a char* and the char*s
+  compared are not the same
+
   // According to https://www.cplusplus.com/reference/map/map/count/, returns 0
   // if an element with the given key doesn't exist
   if (neighbors->count(direction) > 0) {
@@ -109,4 +127,5 @@ Room* Room::findNeighbor(char* direction) {
   else {
     return NULL;
   }
+  */
 }
