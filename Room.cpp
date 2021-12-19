@@ -92,17 +92,21 @@ bool Room::containsItem(Item* searchItem) {
 
 // Adds neighboring room to neighbors map
 void Room::addNeighbor(char* direction, Room* newRoom) {
-  neighbors->insert(direction, newRoom);
+  neighbors->insert(pair<char*, Room*> (direction, newRoom));
 }
 
 Room* Room::findNeighbor(char* direction) {
-  /*
-  for (auto it = neighbors->begin(); it != neighbors->end(); it++) {
-      if ((*it)->
-      }
+  // According to https://www.cplusplus.com/reference/map/map/count/, returns 0
+  // if an element with the given key doesn't exist
+  if (neighbors->count(direction) > 0) {
+    // at() returns the location of the value that corresponds to the given key
+    cout << "Found element at " << direction << endl;
+    cout << "It is ";
+    neighbors->at(direction)->printName();
+    cout << endl;
+    return neighbors->at(direction);
   }
-  */
-  return neighbors->at(direction);
-  // at() returns the location of the value that corresponds to the given key
-
+  else {
+    return NULL;
+  }
 }
