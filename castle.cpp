@@ -212,10 +212,10 @@ int main() {
       // game twists ~~~
       else if (strcmp(currRoom->getName(), "coat chamber") == 0 &&
         strcmp(direction, "NORTH") == 0 &&
-        !coatChamber->containsItem("JADE CARD")) {
+        !coatChamber->containsItem(jadeCard)) {
         cout << "Hmm... looks like it's locked right now. There is a card reader next to the door - looks like you'll need to drop a card in this room." << endl;
       }
-      else if ()
+      // else if ()
       // ~~~
       else {
         currRoom = newRoom;

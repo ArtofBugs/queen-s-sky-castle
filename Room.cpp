@@ -38,6 +38,11 @@ Room::~Room() {
   delete presentItems;
 }
 
+// Returns name of room
+char* Room::getName() {
+  return name;
+}
+
 // Prints name of room
 void Room::printName() {
   cout << name;
@@ -115,5 +120,5 @@ Room* Room::findNeighbor(char* direction) {
 }
 
 void Room::printNeighbors() {
-  
+
 }

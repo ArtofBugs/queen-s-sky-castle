@@ -14,6 +14,7 @@ class Room {
     Room();
     Room(char* name, char* description);
     ~Room();
+    char* getName();
     void printName();
     void printDescription();
     void printPaths();
