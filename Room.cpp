@@ -58,7 +58,7 @@ void Room::addItem(Item* newItem) {
   presentItems->emplace_back(newItem);
 }
 
-// Prints names of all items in room
+// Prints names of all items in room.
 void Room::printItems() {
   for (auto it = presentItems->begin(); it != presentItems->end(); it++) {
     cout << (*it)->getName() << endl;
@@ -66,7 +66,7 @@ void Room::printItems() {
 }
 
 
-// Deletes given item and removes it from presentItems
+// Deletes given item and removes it from presentItems.
 Item* Room::rmItem(char* oldName) {
   for (auto it = presentItems->begin(); it != presentItems->end(); it++) {
     if (strcmp(oldName, (*it)->getName()) == 0) {
@@ -90,17 +90,19 @@ bool Room::containsItem(Item* searchItem) {
   return false;
 }
 
-// Adds neighboring room to neighbors map
+// Adds neighboring room to neighbors map.
 void Room::addNeighbor(char* direction, Room* newRoom) {
   neighbors->insert(pair<char*, Room*> (direction, newRoom));
 }
 
+// For a given direction, sees if the room has a neighbor in that direction. If
+// so, returns a pointer to the neighbor.
 Room* Room::findNeighbor(char* direction) {
 
   for (auto it = neighbors->begin(); it != neighbors->end(); it++) {
-    // if (key_comp(*(*it), *direction) == true) { // key_comp returns true if the two
-      // arguments are not in different places in memory
-
+    // I didn't find a reference page, but from the examples on
+    // https://stackoverflow.com/questions/110157/how-to-retrieve-all-keys-or-values-from-a-stdmap-and-put-them-into-a-vector
+    // first is the key in a map element and second is the value in the element.
     if (strcmp(direction, it->first) == 0) {
       cout << "Found element at " << direction << endl;
       cout << "It is ";
@@ -110,22 +112,8 @@ Room* Room::findNeighbor(char* direction) {
     }
   }
   return NULL;
-  /*
-  I'm guessing this part does not work because the key is a char* and the char*s
-  compared are not the same
+}
 
-  // According to https://www.cplusplus.com/reference/map/map/count/, returns 0
-  // if an element with the given key doesn't exist
-  if (neighbors->count(direction) > 0) {
-    // at() returns the location of the value that corresponds to the given key
-    cout << "Found element at " << direction << endl;
-    cout << "It is ";
-    neighbors->at(direction)->printName();
-    cout << endl;
-    return neighbors->at(direction);
-  }
-  else {
-    return NULL;
-  }
-  */
+void Room::printNeighbors() {
+  
 }

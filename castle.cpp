@@ -101,29 +101,34 @@ int main() {
 
   newName = new char[12];
   strcpy(newName, "west stairs");
-  newDesc = new char[99];
-  strcpy(newDesc, "TODO");
+  newDesc = new char[64];
+  strcpy(newDesc, "The floor-to-ceiling windows give a great view of the queendom.");
   Room* westStairs = new Room(newName, newDesc);
   castle->emplace_back(westStairs);
 
   newName = new char[14];
   strcpy(newName, "sunrise tower");
-  newDesc = new char[5];
-  strcpy(newDesc, "TODO");
+  newDesc = new char[89];
+  strcpy(newDesc, "You're sure the sunrise would look great from this tower... if it weren't the afternoon.");
   Room* sunriseTower = new Room(newName, newDesc);
 
   newName = new char[16];
   strcpy(newName, "queen's bedroom");
-  newDesc = new char[5];
-  strcpy(newDesc, "TODO");
+  newDesc = new char[142];
+  strcpy(newDesc, "The queen's got everything here - canopy bed, spacious (locked) closet, lavish dressing table... the only thing missing is the queen herself.");
   Room* bedroom = new Room(newName, newDesc);
 
   newName = new char[8];
   strcpy(newName, "balcony");
-  newDesc = new char[5];
-  strcpy(newDesc, "TODO");
+  newDesc = new char[93];
+  strcpy(newDesc, "The view is grand, but what's even more eye-catching is the large crown stand in the center.");
   Room* balcony = new Room(newName, newDesc);
 
+
+
+  newDirection = new char[6];
+  strcpy(newDirection, "NORTH");
+  frontGarden->addNeighbor(newDirection, foyer);
 
   newDirection = new char[6];
   strcpy(newDirection, "NORTH");
@@ -132,6 +137,37 @@ int main() {
   newDirection = new char[6];
   strcpy(newDirection, "SOUTH");
   foyer->addNeighbor(newDirection, frontGarden);
+
+  newDirection = new char[6];
+  strcpy(newDirection, "NORTH");
+  mainHall->addNeighbor(newDirection, ballroom);
+
+  newDirection = new char[6];
+  strcpy(newDirection, "SOUTH");
+  mainHall->addNeighbor(newDirection, foyer);
+
+  newDirection = new char[6];
+  strcpy(newDirection, "NORTH");
+  ballroom->addNeighbor(newDirection, coatChamber);
+
+  newDirection = new char[6];
+  strcpy(newDirection, "SOUTH");
+  ballroom->addNeighbor(newDirection, mainHall);
+
+  newDirection = new char[5];
+  strcpy(newDirection, "EAST");
+  ballroom->addNeighbor(newDirection, gallery);
+
+  newDirection = new char[5];
+  strcpy(newDirection, "WEST");
+  ballroom->addNeighbor(newDirection, diningHall);
+
+  newDirection = new char[6];
+  strcpy(newDirection, "NORTH");
+  coatChamber->addNeighbor(newDirection, backGarden);
+
+
+
 
   newDirection = new char[6];
   strcpy(newDirection, "NORTH");
@@ -168,21 +204,21 @@ int main() {
     // characters match; if they do, it returns 0.
     else if (strncmp(command, "GO ", 3) == 0) {
       char* direction = &(command[3]);
-      cout << "Direction found: " << direction << endl;
-      cout << "Going..." << endl;
-
-      // game twists
-      // if (strcmp(currRoom->getName(), "COAT CHAMBER") && strcmp(direction, "NORTH") == 0
-      // && !coatChamber->containsItem("JADE CARD")) {
-
-      // }
 
       Room* newRoom = currRoom->findNeighbor(direction);
-      if (newRoom != NULL) {
-        currRoom = newRoom;
-      }
-      else {
+      if (newRoom == NULL) {
         cout << "You can't go that way!" << endl;
+      }
+      // game twists ~~~
+      else if (strcmp(currRoom->getName(), "coat chamber") == 0 &&
+        strcmp(direction, "NORTH") == 0 &&
+        !coatChamber->containsItem("JADE CARD")) {
+        cout << "Hmm... looks like it's locked right now. There is a card reader next to the door - looks like you'll need to drop a card in this room." << endl;
+      }
+      else if ()
+      // ~~~
+      else {
+        currRoom = newRoom;
       }
       delete command;
       printCurrPlace(currRoom);
