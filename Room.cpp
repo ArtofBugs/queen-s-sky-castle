@@ -131,10 +131,6 @@ Room* Room::findNeighbor(char* direction) {
     // https://stackoverflow.com/questions/110157/how-to-retrieve-all-keys-or-values-from-a-stdmap-and-put-them-into-a-vector
     // first is the key in a map element and second is the value in the element.
     if (strcmp(direction, it->first) == 0) {
-      cout << "Found element at " << direction << endl;
-      cout << "It is ";
-      it->second->printName();
-      cout << endl;
       return it->second;
     }
   }

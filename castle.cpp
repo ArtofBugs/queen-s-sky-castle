@@ -1,6 +1,15 @@
 /*
+Queen's Sky Castle - Zuul: A text-based, single-player adventure game that can
+be played in a terminal. Navigate through the castle (a map of Room objects),
+take and drop Items, and check your inventory by entering text commands. A list
+of commands and other information on how to play can be printed by entering th
+HELP command in the game.
+Gameplay starts with the player in the foyer Room. To win the game, drop the
+crown Item in the balcony Room.
 For a map of the castle, visit this link:
 https://drive.google.com/file/d/1uFgxeS7I4TR3Gba0C-XyWu_gwyGmyH88/view?usp=sharing
+Information about game twists (like locked rooms, new item appearances, and
+changing items) can be found at that link.
 */
 
 using namespace std;
@@ -320,22 +329,27 @@ int main() {
       else if (&(*currRoom) == coatChamber && &(*newRoom) == backGarden &&
       !coatChamber->containsItem(jadeCard)) {
         cout << "Hmm... looks like it's locked right now. There is a card reader next to the door - according to the sign, you'll need to drop a card in this room to unlock the coat chamber door." << endl;
+        cout << endl;
       }
       else if (&(*currRoom) == kitchen && &(*newRoom) == backGarden &&
       !coatChamber->containsItem(jadeCard) && !kitchen->containsItem(jadeCard)) {
         cout << "Hmm... looks like it's locked right now. There is a jade-colored card reader next to the door - according to the sign, dropping a card in this room will unlock all doors to the back garden." << endl;
+        cout << endl;
       }
       else if (&(*currRoom) == ballroom && &(*newRoom) == gallery &&
       !inventory->containsItem(spoon)) {
         cout << "The robot in front of the door says that only individuals carrying out specific errands are allowed in this room. The robot also says a spoon is missing from the gallery. Maybe the robot will let you in if you get the spoon?" << endl;
+        cout << endl;
       }
       else if (&(*currRoom) == diningHall && &(*newRoom) == westStairs &&
       !inventory->containsItem(telescope)) {
         cout << "There's a sign above the door that says only authorized observers carrying royal telescopes are allowed in here." << endl;
+        cout << endl;
       }
       else if (&(*currRoom) == sunriseTower && &(*newRoom) == bedroom &&
       !sunriseTower->containsItem(umbrella)) {
         cout << "Only visitors who leave an umbrella in the sunrise tower's umbrella collection are allowed to enter." << endl;
+        cout << endl;
       }
       // ~~~
       else {
@@ -350,18 +364,14 @@ int main() {
     }
     else if (strncmp(command, "TAKE ", 5) == 0) {
       char* itemName = &(command[5]);
-      cout << "Object found: " << itemName << endl;
-      cout << "TAKING..." << endl;
       takeItem(itemName, inventory, currRoom);
       delete command;
     }
     else if (strncmp(command, "DROP ", 5) == 0) {
       char* itemName = &(command[5]);
-      cout << "Object found: " << itemName << endl;
-      cout << "DROPPING..." << endl;
 
       // game twists ~~~
-      if (strcmp(itemName, "SUN SEEDS") == 0) {
+      if (strcmp(itemName, "SUN SEEDS") == 0 && &(*currRoom) == &(*backGarden)) {
         delete sunSeeds->getName();
         itemName = new char[12];
         strcpy(itemName, "SUN BERRIES");
@@ -369,7 +379,6 @@ int main() {
       }
       else if (strcmp(itemName, "SUN BERRIES") == 0 &&
       strcmp(currRoom->getName(), "kitchen") == 0) {
-        cout << "adding soup & spoon" << endl;
         diningHall->addItem(soup);
         diningHall->addItem(spoon);
       }
@@ -392,6 +401,7 @@ int main() {
     }
 
   }
+
   cout << "You won! Thank you for playing!" << endl;
   return 0;
 }
