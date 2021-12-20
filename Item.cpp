@@ -21,7 +21,7 @@ Item::Item(char* newName) {
 
 // Deletes item.
 Item::~Item() {
-  delete name;
+  delete[] name;
 }
 
 // Return pointer to name of item.
