@@ -1,3 +1,7 @@
+/*
+Item class with name (char*). Includes accessors and functions to print name.
+*/
+
 #ifndef ITEM_H
 #define ITEM_H
 

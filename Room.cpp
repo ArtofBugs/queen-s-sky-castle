@@ -1,3 +1,11 @@
+/*
+Room class with name (char*), description (char*), neighbors (map), and present
+items (vector. Each map element has a direction char* as a key and a Room* as a
+value. Inventory is a Room with \0 name and description and empty neighbors.
+Includes accessors, functions to print attributes, functions to add and search
+for neighbors, and functions to add and remove Items.
+*/
+
 #include <iostream>
 #include <cstring>
 #include <vector>
@@ -15,20 +23,18 @@ Room::Room() {
   description[0] = '\0';
   presentItems = new vector <Item*>;
   neighbors = new map <char*, Room*>;
-  locked = false;
 }
 
-// When constructing rooms, provide room name
-// Add items to room after construction.
+// Constructs Room with given name and description. (Add items to room after
+// construction.)
 Room::Room(char* newName, char* newDesc) {
   name = newName;
   description = newDesc;
   presentItems = new vector <Item*>;
   neighbors = new map <char*, Room*>;
-  locked = false;
 }
 
-// Delete attributes and items in room
+// Deletes attributes and Items in room.
 Room::~Room() {
   delete[] name;
   delete[] description;
@@ -38,22 +44,22 @@ Room::~Room() {
   delete presentItems;
 }
 
-// Returns name of room
+// Returns name of room.
 char* Room::getName() {
   return name;
 }
 
-// Prints name of room
+// Prints name of room.
 void Room::printName() {
   cout << name;
 }
 
-// Prints description of room
+// Prints description of room.
 void Room::printDescription() {
   cout << description << endl;
 }
 
-// Prints possible directions to move from current room
+// Prints possible directions to move from current room.
 void Room::printPaths() {
   bool firstEntry = true; // don't include spacer before first entry
   // iterate through neighbors map and print directions (keys)
@@ -72,7 +78,7 @@ void Room::printPaths() {
   cout << endl;
 }
 
-// Adds given item to the room's presentItems
+// Adds given item to the room's presentItems.
 void Room::addItem(Item* newItem) {
   presentItems->emplace_back(newItem);
 }

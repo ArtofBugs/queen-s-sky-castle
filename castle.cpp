@@ -165,8 +165,8 @@ int main() {
 
   newName = new char[12];
   strcpy(newName, "star tower");
-  newDesc = new char[5];
-  strcpy(newDesc, "TODO");
+  newDesc = new char[75];
+  strcpy(newDesc, "The queen uses this room for stargazing. Too bad it's still the afternoon.");
   Room* starTower = new Room(newName, newDesc);
   castle->emplace_back(starTower);
 
@@ -331,6 +331,8 @@ int main() {
 
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+
+
   printHelp();
   printCurrPlace(currRoom);
 
@@ -350,6 +352,7 @@ int main() {
         cout << "You can't go that way!" << endl;
         cout << endl;
       }
+
       // game twists ~~~
       else if (&(*currRoom) == coatChamber && &(*newRoom) == backGarden &&
       !coatChamber->containsItem(jadeCard)) {
@@ -377,6 +380,7 @@ int main() {
         cout << endl;
       }
       // ~~~
+
       else {
         currRoom = newRoom;
       }
@@ -425,9 +429,7 @@ int main() {
       delete command;
       continue;
     }
-
   }
-
   cout << "You won! Thank you for playing!" << endl;
   return 0;
 }
@@ -488,7 +490,6 @@ void takeItem(char* itemName, Room* inventory, Room* currRoom) {
   }
 }
 
-
 // Take in user input and return it as a char* to a cstring.
 // (Creates a cstring on the heap!)
 // Code taken from my media database project: ----------------------------------
@@ -516,4 +517,4 @@ char* promptText() {
 
   return newArr;
 }
-//----------------------------------------------------------------------------
+//------------------------------------------------------------------------------

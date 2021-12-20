@@ -1,3 +1,11 @@
+/*
+Room class with name (char*), description (char*), neighbors (map), and present
+items (vector. Each map element has a direction char* as a key and a Room* as a
+value. Inventory is a Room with \0 name and description and empty neighbors.
+Includes accessors, functions to print attributes, functions to add and search
+for neighbors, and functions to add and remove Items.
+*/
+
 #ifndef ROOM_H
 #define ROOM_H
 
@@ -30,7 +38,6 @@ class Room {
     char* name;
     map <char*, Room*> * neighbors;
     char* description;
-    bool locked;
 };
 
 #endif
