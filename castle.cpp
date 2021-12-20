@@ -280,6 +280,11 @@ int main() {
   Item* crown = new Item(newName);
   gallery->addItem(crown);
 
+  newName = new char[10];
+  strcpy(newName, "TELESCOPE");
+  Item* telescope = new Item(newName);
+  gallery->addItem(telescope);
+
   newName = new char[5];
   strcpy(newName, "SOUP");
   Item* soup = new Item(newName);
@@ -314,9 +319,22 @@ int main() {
       // game twists ~~~
       else if (strcmp(currRoom->getName(), "coat chamber") == 0 &&
       strcmp(direction, "NORTH") == 0 && !coatChamber->containsItem(jadeCard)) {
-        cout << "Hmm... looks like it's locked right now. There is a card reader next to the door - you'll need to drop a card in this room." << endl;
+        cout << "Hmm... looks like it's locked right now. There is a card reader next to the door - according to the sign, you'll need to drop a card in this room to unlock the coat chamber door." << endl;
       }
-      // else if ()
+      else if (strcmp(currRoom->getName(), "kitchen") == 0 &&
+      strcmp(direction, "EAST") == 0 && !coatChamber->containsItem(jadeCard) &&
+      !kitchen->containsItem(jadeCard)) {
+        cout << "Hmm... looks like it's locked right now. There is a jade-colored card reader next to the door - according to the sign, dropping a card in this room will unlock all doors to the back garden." << endl;
+      }
+      else if (strcmp(currRoom->getName(), "ballroom") == 0 &&
+      strcmp(direction, "EAST") == 0 && !inventory->containsItem(spoon)) {
+        cout << "The robot in front of the door says that only individuals carrying out specific errands are allowed in this room. The robot also says a spoon is missing from the gallery. Maybe the robot will let you in if you get the spoon?" << endl;
+      }
+      else if (strcmp(currRoom->getName(), "dining hall") == 0 &&
+      strcmp(direction, "SOUTH") == 0 && !inventory->containsItem(spoon)) {
+        cout << "There's a sign above the door that says only authorized observers carrying royal telescopes are allowed in here." << endl;
+      }
+      // TODO maybe for safety compare locations of room pointers (currRoom and newRoom) instead of room names?
       // ~~~
       else {
         currRoom = newRoom;
@@ -366,7 +384,7 @@ int main() {
     }
     else {
       cout << "Command not recognized. Type HELP for a list of command words." << endl;
-      cout << end;
+      cout << endl;
       delete command;
       continue;
     }
