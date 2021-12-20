@@ -25,7 +25,10 @@ int main() {
   Room* currRoom;
   vector <Room*> * castle = new vector <Room*>;
 
+
+
   // Rooms and items setup ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
   char* newName = new char[1];
   char* newDesc = new char[1];
   char* newDirection;
@@ -64,20 +67,6 @@ int main() {
   Room* ballroom = new Room(newName, newDesc);
   castle->emplace_back(ballroom);
 
-  newName = new char[12];
-  strcpy(newName, "dining hall");
-  newDesc = new char[124];
-  strcpy(newDesc, "Chandeliers, tables, and... only leftovers. There's no time to eat now, anyway. Maybe you'll catch another feast next time.");
-  Room* diningHall = new Room(newName, newDesc);
-  castle->emplace_back(diningHall);
-
-  newName = new char[8];
-  strcpy(newName, "gallery");
-  newDesc = new char[107];
-  strcpy(newDesc, "Art gallery? Photo gallery? Theater gallery? The queen's got everything here... except for the spectators.");
-  Room* gallery = new Room(newName, newDesc);
-  castle->emplace_back(gallery);
-
   newName = new char[13];
   strcpy(newName, "coat chamber");
   newDesc = new char[120];
@@ -91,6 +80,13 @@ int main() {
   strcpy(newDesc, "Wait, there are ice sculptures here? (And flowers, of course.)");
   Room* backGarden = new Room(newName, newDesc);
   castle->emplace_back(backGarden);
+
+  newName = new char[12];
+  strcpy(newName, "dining hall");
+  newDesc = new char[124];
+  strcpy(newDesc, "Chandeliers, tables, and... only leftovers. There's no time to eat now, anyway. Maybe you'll catch another feast next time.");
+  Room* diningHall = new Room(newName, newDesc);
+  castle->emplace_back(diningHall);
 
   newName = new char[8];
   strcpy(newName, "kitchen");
@@ -111,18 +107,42 @@ int main() {
   newDesc = new char[89];
   strcpy(newDesc, "You're sure the sunrise would look great from this tower... if it weren't the afternoon.");
   Room* sunriseTower = new Room(newName, newDesc);
+  castle->emplace_back(sunriseTower);
 
   newName = new char[16];
   strcpy(newName, "queen's bedroom");
   newDesc = new char[142];
   strcpy(newDesc, "The queen's got everything here - canopy bed, spacious (locked) closet, lavish dressing table... the only thing missing is the queen herself.");
   Room* bedroom = new Room(newName, newDesc);
+  castle->emplace_back(bedroom);
 
   newName = new char[8];
   strcpy(newName, "balcony");
   newDesc = new char[93];
   strcpy(newDesc, "The view is grand, but what's even more eye-catching is the large crown stand in the center.");
   Room* balcony = new Room(newName, newDesc);
+  castle->emplace_back(balcony);
+
+  newName = new char[8];
+  strcpy(newName, "gallery");
+  newDesc = new char[107];
+  strcpy(newDesc, "Art gallery? Photo gallery? Theater gallery? The queen's got everything here... except for the spectators.");
+  Room* gallery = new Room(newName, newDesc);
+  castle->emplace_back(gallery);
+
+  newName = new char[12];
+  strcpy(newName, "east stairs");
+  newDesc = new char[64];
+  strcpy(newDesc, "The floor-to-ceiling windows give a great view of the queendom.");
+  Room* eastStairs = new Room(newName, newDesc);
+  castle->emplace_back(eastStairs);
+
+  newName = new char[12];
+  strcpy(newName, "star tower");
+  newDesc = new char[5];
+  strcpy(newDesc, "TODO");
+  Room* starTower = new Room(newName, newDesc);
+  castle->emplace_back(starTower);
 
 
 
@@ -166,12 +186,77 @@ int main() {
   strcpy(newDirection, "NORTH");
   coatChamber->addNeighbor(newDirection, backGarden);
 
+  newDirection = new char[6];
+  strcpy(newDirection, "SOUTH");
+  coatChamber->addNeighbor(newDirection, ballroom);
 
+  newDirection = new char[5];
+  strcpy(newDirection, "WEST");
+  backGarden->addNeighbor(newDirection, kitchen);
 
+  newDirection = new char[6];
+  strcpy(newDirection, "SOUTH");
+  backGarden->addNeighbor(newDirection, coatChamber);
 
   newDirection = new char[6];
   strcpy(newDirection, "NORTH");
+  diningHall->addNeighbor(newDirection, kitchen);
+
+  newDirection = new char[5];
+  strcpy(newDirection, "EAST");
+  diningHall->addNeighbor(newDirection, ballroom);
+
+  newDirection = new char[6];
+  strcpy(newDirection, "SOUTH");
+  diningHall->addNeighbor(newDirection, westStairs);
+
+  newDirection = new char[5];
+  strcpy(newDirection, "EAST");
+  kitchen->addNeighbor(newDirection, backGarden);
+
+  newDirection = new char[6];
+  strcpy(newDirection, "SOUTH");
+  kitchen->addNeighbor(newDirection, diningHall);
+
+  newDirection = new char[6];
+  strcpy(newDirection, "NORTH");
+  westStairs->addNeighbor(newDirection, diningHall);
+
+  newDirection = new char[6];
+  strcpy(newDirection, "SOUTH");
+  sunriseTower->addNeighbor(newDirection, bedroom);
+
+  newDirection = new char[6];
+  strcpy(newDirection, "NORTH");
+  bedroom->addNeighbor(newDirection, sunriseTower);
+
+  newDirection = new char[6];
+  strcpy(newDirection, "SOUTH");
   bedroom->addNeighbor(newDirection, balcony);
+
+  newDirection = new char[6];
+  strcpy(newDirection, "NORTH");
+  balcony->addNeighbor(newDirection, bedroom);
+
+  newDirection = new char[6];
+  strcpy(newDirection, "SOUTH");
+  gallery->addNeighbor(newDirection, eastStairs);
+
+  newDirection = new char[5];
+  strcpy(newDirection, "WEST");
+  gallery->addNeighbor(newDirection, ballroom);
+
+  newDirection = new char[6];
+  strcpy(newDirection, "NORTH");
+  eastStairs->addNeighbor(newDirection, gallery);
+
+  newDirection = new char[6];
+  strcpy(newDirection, "SOUTH");
+  eastStairs->addNeighbor(newDirection, starTower);
+
+  newDirection = new char[6];
+  strcpy(newDirection, "NORTH");
+  starTower->addNeighbor(newDirection, eastStairs);
 
 
 
@@ -180,13 +265,28 @@ int main() {
   Item* jadeCard = new Item(newName);
   foyer->addItem(jadeCard);
 
+  newName = new char[10];
+  strcpy(newName, "SUN SEEDS");
+  Item* sunSeeds = new Item(newName);
+  frontGarden->addItem(sunSeeds);
+
+  newName = new char[9];
+  strcpy(newName, "UMBRELLA");
+  Item* umbrella = new Item(newName);
+  mainHall->addItem(umbrella);
+
   newName = new char[6];
   strcpy(newName, "CROWN");
   Item* crown = new Item(newName);
   gallery->addItem(crown);
 
+  newName = new char[5];
+  strcpy(newName, "SOUP");
+  Item* soup = new Item(newName);
 
-
+  newName = new char[6];
+  strcpy(newName, "SPOON");
+  Item* spoon = new Item(newName);
 
 
 
@@ -202,18 +302,19 @@ int main() {
     }
     // Given an integer n, strncmp() compares two cstrings to see if the first n
     // characters match; if they do, it returns 0.
+    // (https://www.cplusplus.com/reference/cstring/strncmp/)
     else if (strncmp(command, "GO ", 3) == 0) {
       char* direction = &(command[3]);
 
       Room* newRoom = currRoom->findNeighbor(direction);
       if (newRoom == NULL) {
         cout << "You can't go that way!" << endl;
+        cout << endl;
       }
       // game twists ~~~
       else if (strcmp(currRoom->getName(), "coat chamber") == 0 &&
-        strcmp(direction, "NORTH") == 0 &&
-        !coatChamber->containsItem(jadeCard)) {
-        cout << "Hmm... looks like it's locked right now. There is a card reader next to the door - looks like you'll need to drop a card in this room." << endl;
+      strcmp(direction, "NORTH") == 0 && !coatChamber->containsItem(jadeCard)) {
+        cout << "Hmm... looks like it's locked right now. There is a card reader next to the door - you'll need to drop a card in this room." << endl;
       }
       // else if ()
       // ~~~
@@ -238,15 +339,24 @@ int main() {
       char* itemName = &(command[5]);
       cout << "Object found: " << itemName << endl;
       cout << "DROPPING..." << endl;
+
+      // game twists ~~~
+      if (strcmp(itemName, "SUN SEEDS") == 0) {
+        delete sunSeeds->getName();
+        itemName = new char[12];
+        strcpy(itemName, "SUN BERRIES");
+        sunSeeds->setName(itemName);
+      }
+      else if (strcmp(itemName, "SUN BERRIES") == 0 &&
+      strcmp(currRoom->getName(), "kitchen") == 0) {
+        cout << "adding soup & spoon" << endl;
+        diningHall->addItem(soup);
+        diningHall->addItem(spoon);
+      }
+      // ~~~
+
       dropItem(itemName, inventory, currRoom);
       delete command;
-
-      // game twists
-      if (strcmp(itemName, "sun berries") == 0) {
-        // diningHall.addItem(soup);
-        // diningHall.addItem(spoon);
-      }
-
       printCurrPlace(currRoom);
     }
     else if (strcmp(command, "QUIT") == 0) {
@@ -256,6 +366,7 @@ int main() {
     }
     else {
       cout << "Command not recognized. Type HELP for a list of command words." << endl;
+      cout << end;
       delete command;
       continue;
     }
@@ -273,6 +384,7 @@ void printHelp() {
   cout << "Your command words are:" << endl;
   cout << "GO {DIRECTION}    INVENTORY    TAKE {OBJECT IN INVENTORY}    DROP {OBJECT IN ROOM}    HELP    QUIT" << endl;
   cout << "Commands should be written in all caps!" << endl;
+  cout << endl;
   cout << endl;
 }
 
@@ -305,7 +417,7 @@ void printInventory(Room* inventory) {
 // inventory; drop the item in the current room if it exists.
 void dropItem(char* itemName, Room* inventory, Room* currRoom) {
   Item* move = inventory->rmItem(itemName);
-  if (move != NULL) { // Info on NULL is in the Linked List lesson :)
+  if (move != NULL) {
     currRoom->addItem(move);
   }
   cout << endl;

@@ -55,7 +55,21 @@ void Room::printDescription() {
 
 // Prints possible directions to move from current room
 void Room::printPaths() {
+  bool firstEntry = true; // don't include spacer before first entry
   // iterate through neighbors map and print directions (keys)
+  for (auto it = neighbors->begin(); it != neighbors->end(); it++) {
+    if (firstEntry) {
+      firstEntry = false;
+    }
+    else {
+      cout << "  ";
+    }
+    // I didn't find a reference page, but from the examples on
+    // https://stackoverflow.com/questions/110157/how-to-retrieve-all-keys-or-values-from-a-stdmap-and-put-them-into-a-vector
+    // first is the key in a map element and second is the value in the element.
+    cout << it->first;
+  }
+  cout << endl;
 }
 
 // Adds given item to the room's presentItems
@@ -65,9 +79,17 @@ void Room::addItem(Item* newItem) {
 
 // Prints names of all items in room.
 void Room::printItems() {
+  bool firstEntry = true; // don't include spacer before first entry
   for (auto it = presentItems->begin(); it != presentItems->end(); it++) {
-    cout << (*it)->getName() << endl;
+    if (firstEntry) {
+      firstEntry = false;
+    }
+    else {
+      cout << "  ";
+    }
+    cout << (*it)->getName();
   }
+  cout << endl;
 }
 
 
@@ -117,8 +139,4 @@ Room* Room::findNeighbor(char* direction) {
     }
   }
   return NULL;
-}
-
-void Room::printNeighbors() {
-
 }

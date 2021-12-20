@@ -24,7 +24,6 @@ class Room {
     bool containsItem(Item*);
     void addNeighbor(char*, Room*);
     Room* findNeighbor(char*);
-    void printNeighbors();
 
   protected:
     vector <Item*> * presentItems;
