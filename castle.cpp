@@ -265,10 +265,6 @@ int main() {
   bedroom->addNeighbor(newDirection, sunriseTower);
 
   newDirection = new char[6];
-  strcpy(newDirection, "NORTH");
-  bedroom->addNeighbor(newDirection, sunriseTower);
-
-  newDirection = new char[6];
   strcpy(newDirection, "SOUTH");
   bedroom->addNeighbor(newDirection, balcony);
 
