@@ -10,6 +10,23 @@ For a map of the castle, visit this link:
 https://drive.google.com/file/d/1uFgxeS7I4TR3Gba0C-XyWu_gwyGmyH88/view?usp=sharing
 Information about game twists (like locked rooms, new item appearances, and
 changing items) can be found at that link.
+Spoliers for how to win the game:
+1. Take the jade card from the foyer.
+2. Take the sun seeds from the front garden.
+3. Take the umbrella from the main hall. This will grant you access to the
+queen's bedroom later.
+4. Drop the jade card in either the coat chamber (preferred) or the kitchen to
+unlock access to the back garden.
+5. Drop the sun seeds in the back garden. They will grow into sun berries.
+6. Drop the sun berries in the kitchen. The soup and spoon will appear in the
+dining hall.
+7. Take the spoon from the dining hall; this will grant you access to the
+gallery.
+8. Take the crown from the gallery.
+9. Take the telescope from the star tower. This will grant you access to the
+west stairs.
+10. Enter the queen's bedroom (only if you remembered step 3) and enter the
+balcony. Drop the crown on the balcony to win!
 */
 
 using namespace std;
@@ -292,7 +309,7 @@ int main() {
   newName = new char[10];
   strcpy(newName, "TELESCOPE");
   Item* telescope = new Item(newName);
-  gallery->addItem(telescope);
+  starTower->addItem(telescope);
 
   newName = new char[5];
   strcpy(newName, "SOUP");
@@ -365,6 +382,7 @@ int main() {
     else if (strncmp(command, "TAKE ", 5) == 0) {
       char* itemName = &(command[5]);
       takeItem(itemName, inventory, currRoom);
+      printCurrPlace(currRoom);
       delete command;
     }
     else if (strncmp(command, "DROP ", 5) == 0) {
@@ -460,7 +478,6 @@ void takeItem(char* itemName, Room* inventory, Room* currRoom) {
   if (move != NULL) {
     inventory->addItem(move);
   }
-  cout << endl;
 }
 
 
