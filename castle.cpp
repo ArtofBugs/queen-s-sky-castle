@@ -228,13 +228,13 @@ int main() {
   strcpy(newDirection, "NORTH");
   diningHall->addNeighbor(newDirection, kitchen);
 
-  newDirection = new char[5];
-  strcpy(newDirection, "EAST");
-  diningHall->addNeighbor(newDirection, ballroom);
-
   newDirection = new char[6];
   strcpy(newDirection, "SOUTH");
   diningHall->addNeighbor(newDirection, westStairs);
+
+  newDirection = new char[5];
+  strcpy(newDirection, "EAST");
+  diningHall->addNeighbor(newDirection, ballroom);
 
   newDirection = new char[5];
   strcpy(newDirection, "EAST");
@@ -250,7 +250,19 @@ int main() {
 
   newDirection = new char[6];
   strcpy(newDirection, "SOUTH");
+  westStairs->addNeighbor(newDirection, sunriseTower);
+
+  newDirection = new char[6];
+  strcpy(newDirection, "NORTH");
+  sunriseTower->addNeighbor(newDirection, westStairs);
+
+  newDirection = new char[6];
+  strcpy(newDirection, "SOUTH");
   sunriseTower->addNeighbor(newDirection, bedroom);
+
+  newDirection = new char[6];
+  strcpy(newDirection, "NORTH");
+  bedroom->addNeighbor(newDirection, sunriseTower);
 
   newDirection = new char[6];
   strcpy(newDirection, "NORTH");
