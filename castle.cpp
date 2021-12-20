@@ -384,25 +384,25 @@ int main() {
       else {
         currRoom = newRoom;
       }
-      delete command;
+      delete[] command;
       printCurrPlace(currRoom);
     }
     else if (strcmp(command, "INVENTORY") == 0) {
       printInventory(inventory);
-      delete command;
+      delete[] command;
     }
     else if (strncmp(command, "TAKE ", 5) == 0) {
       char* itemName = &(command[5]);
       takeItem(itemName, inventory, currRoom);
       printCurrPlace(currRoom);
-      delete command;
+      delete[] command;
     }
     else if (strncmp(command, "DROP ", 5) == 0) {
       char* itemName = &(command[5]);
 
       // game twists ~~~
       if (strcmp(itemName, "SUN SEEDS") == 0 && &(*currRoom) == &(*backGarden)) {
-        delete sunSeeds->getName();
+        delete[] sunSeeds->getName();
         itemName = new char[12];
         strcpy(itemName, "SUN BERRIES");
         sunSeeds->setName(itemName);
@@ -415,18 +415,18 @@ int main() {
       // ~~~
 
       dropItem(itemName, inventory, currRoom);
-      delete command;
+      delete[] command;
       printCurrPlace(currRoom);
     }
     else if (strcmp(command, "QUIT") == 0) {
       cout << "Thank you for playing!" << endl;
-      delete command;
+      delete[] command;
       return 0;
     }
     else {
       cout << "Command not recognized. Type HELP for a list of command words." << endl;
       cout << endl;
-      delete command;
+      delete[] command;
       continue;
     }
   }
@@ -492,7 +492,7 @@ void takeItem(char* itemName, Room* inventory, Room* currRoom) {
 
 // Take in user input and return it as a char* to a cstring.
 // (Creates a cstring on the heap!)
-// Code taken from my media database project: ----------------------------------
+// Code taken from my media database project (with fix for delete): ------------
 char* promptText() {
   // Adapted from setNames() code from my student list project
   char* newArr = new char[1];
@@ -502,7 +502,7 @@ char* promptText() {
   int oldSize = 1;
 
   while (cin.peek() != '\n') {
-    delete oldArr;
+    delete[] oldArr;
     oldArr = &(*newArr);
     oldSize++;
     newArr = new char[oldSize + 1];
@@ -513,7 +513,7 @@ char* promptText() {
   }
   cin.ignore(); // ending '\n'
 
-  delete oldArr;
+  delete[] oldArr;
 
   return newArr;
 }
